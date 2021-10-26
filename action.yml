@@ -11,12 +11,12 @@ inputs:
     required: false
     default: 'Directory.Build.props'
 outputs:
-  random-number:
-    description: "Random number"
-    value: ${{ steps.random-number-generator.outputs.version }}
+  version:
+    description: "The .NET version"
+    value: ${{ steps.find.outputs.version }}
 runs:
   using: "composite"
   steps:
-    - id: random-number-generator
+    - id: find
       run: echo "::set-output name=version::$(egrep -o "[0-9]+\.[0-9]+\.[0-9]+" ${{ inputs.file_path}})"
       shell: bash
